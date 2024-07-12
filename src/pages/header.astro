@@ -1,9 +1,9 @@
 ---
-import Layout from "../layouts/Layout.astro";
 import ThemeToggle from "../components/ThemeToggle.astro";
 ---
 
-<div class='min-h-72 flex flex-col justify-around'>
+<div
+  class='min-h-80 max-sm:min-h-full flex flex-col justify-around py-10 max-sm:px-4'>
   <div class='flex justify-between'>
     <div>
       <h1 class='font-bold text-lg'>Naing Linn Phyo</h1>
@@ -13,7 +13,7 @@ import ThemeToggle from "../components/ThemeToggle.astro";
       <ThemeToggle />
     </div>
   </div>
-  <div>
+  <div class='max-sm:mt-10'>
     <p>
       I'm a backend developer and team lead at <a
         href='https://xsphere.co'
