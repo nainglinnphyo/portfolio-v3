@@ -1,0 +1,55 @@
+---
+// import Icon from "./Icon.astro";
+import { Icon } from "astro-icon/components";
+---
+
+<button onclick='window.toggleTheme()' class='text-xl'>
+  <Icon name='moon' id='moon-svg' />
+  <Icon name='sun' id='sun-svg' />
+</button>
+
+<script is:inline>
+  const toggleTheme = () => {
+    const htmlElement = document.documentElement;
+    if (htmlElement.classList.contains("dark")) {
+      htmlElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+      updateIcon("sun");
+    } else {
+      htmlElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+      updateIcon("moon");
+    }
+  };
+
+  const updateIcon = iconName => {
+    if (iconName === "sun") {
+      const sunEle = document.getElementById("sun-svg");
+      sunEle.style.display = "none";
+      const moonEle = document.getElementById("moon-svg");
+      moonEle.style.display = "block";
+    } else {
+      const sunEle = document.getElementById("moon-svg");
+      sunEle.style.display = "none";
+      const moonEle = document.getElementById("sun-svg");
+      moonEle.style.display = "block";
+    }
+  };
+  window.addEventListener("load", () => {
+    const theme = localStorage.getItem("theme");
+    const prefersDarkScheme = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
+    const htmlElement = document.documentElement;
+    if (theme === "dark" || (!theme && prefersDarkScheme)) {
+      htmlElement.classList.add("dark");
+      updateIcon("moon");
+    } else {
+      htmlElement.classList.remove("dark");
+      updateIcon("sun");
+    }
+  });
+
+  // Expose the function to the global scope
+  window.toggleTheme = toggleTheme;
+</script>
