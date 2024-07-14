@@ -7,7 +7,7 @@ import React from 'react';
 
 function Main() {
      return (
-          <div className='flex flex-col space-y-8'>
+          <div className='flex flex-col space-y-10'>
                <Home />
                <Exp />
           </div>
