@@ -1,6 +1,4 @@
-declare global {
-  interface Window {
-    toggleTheme: () => void;
-  }
+interface LoadingBarProps {
+  mount: boolean;
+  setMount: React.Dispatch<React.SetStateAction<boolean>>;
 }
-export {};

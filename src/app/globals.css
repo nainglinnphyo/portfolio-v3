@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply dark:bg-gray-800 bg-white;
+  }
+}
+@keyframes underline-animation {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.underline-animation {
+  position: relative;
+  overflow: hidden;
+}
+
+.underline-animation::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px; /* Adjust the height of the underline as needed */
+  background-color: currentColor; /* Use the current text color */
+  transition: width 0.3s ease-in-out; /* Adjust the duration as needed */
+}
+
+.underline-animation:hover::after,
+.underline-animation.active::after {
+  width: 100%;
+}
+
+body {
+  font-family: "wudoo-mono", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
