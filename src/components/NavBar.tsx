@@ -11,7 +11,7 @@ const Navbar = () => {
      };
 
      return (
-          <div className='flex justify-between py-4'>
+          <div className='flex justify-between py-6'>
                <nav>
                     <ul className='flex space-x-4'>
                          <li className={`underline-animation ${getActiveClass('/')}`}>
