@@ -4,7 +4,7 @@ import { exp } from '@/utils/exp'
 
 function Exp() {
      return (
-          <div className='space-y-8'>
+          <div className='space-y-8 max-sm:space-y-4'>
                <h1 className='text-lg font-bold'>Experience_</h1>
                {exp.map((e) => {
                     return (
