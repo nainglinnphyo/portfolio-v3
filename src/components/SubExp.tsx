@@ -6,7 +6,7 @@ function SubExp({ company, jd, title, workDate }: JobDescription) {
           <div className='space-y-3'>
                <div>
                     <h2 className='text-base'>{title}</h2>
-                    <h1 className='text-lg font-bold'>{company}</h1>
+                    <h1 className='text-lg font-bold max-sm:text-base'>{company}</h1>
                     <h2 className='text-base'>{workDate}</h2>
                </div>
                <div className='space-y-3'>
