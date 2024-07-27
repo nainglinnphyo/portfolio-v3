@@ -15,7 +15,7 @@ function Home() {
           <Link
             href="https://xsphere.co"
             passHref
-            className="dark:text-green-500 text-[#0B652F] underline"
+            className="dark:text-green-500 text-[#0B652F] underline font-semibold"
           >
             xsphere.co
           </Link>
@@ -26,7 +26,7 @@ function Home() {
           <Link
             href="https://farytaxi.com"
             passHref
-            className="dark:text-green-500 text-[#0B652F] underline"
+            className="dark:text-green-500 text-[#0B652F] underline font-semibold"
           >
             Fary Taxi
           </Link>{" "}

@@ -7,7 +7,8 @@ import Navbar from "../components/NavBar";
 
 export const metadata: Metadata = {
   title: "Dev | Nainglinnphyo",
-  description: "",
+  description:
+    "Experienced full-stack developer with front-end and back-end technologies, including JavaScript, Node.js, GoLang , PHP and SQL.",
 };
 
 const WudooMono = localFont({
