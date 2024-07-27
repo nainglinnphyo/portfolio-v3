@@ -22,11 +22,9 @@ function SubExp({ company, jd, title, workDate }: JobDescription) {
 const JobDescription = ({ jd }: { jd: string }) => {
   return (
     <div className="flex space-x-6 max-sm:text-sm">
-      {/* <LineAnimationTwo> */}
       <div className="mt-[0.38rem]">
         <SiPluscodes />
       </div>
-      {/* </LineAnimationTwo> */}
       <div className="">{jd}</div>
     </div>
   );

@@ -29,9 +29,7 @@ const Navbar = () => {
         </ul>
       </nav>
       <div className="mt-1 h-full text-lg">
-        {/* <LineAnimation> */}
         <ThemeSwitch />
-        {/* </LineAnimation> */}
       </div>
     </div>
   );
