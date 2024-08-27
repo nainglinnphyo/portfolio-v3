@@ -3,12 +3,11 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 import localFont from "next/font/local";
-import Navbar from "../components/NavBar";
 
 export const metadata: Metadata = {
-  title: "Dev | Nainglinnphyo",
+  title: "Launching Soon - Our Custom Map Service | Inspired by FaryTaxi",
   description:
-    "Experienced full-stack developer with front-end and back-end technologies, including JavaScript, Node.js, GoLang , PHP and SQL.",
+    "Our new website is launching soon with an innovative custom map service, inspired by the FaryTaxi.com. Stay tuned for more!",
 };
 
 const WudooMono = localFont({
@@ -54,10 +53,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${WudooMono.className}`}>
-        <main className="max-w-[45%] max-sm:max-w-[85%] m-auto">
+        <main className="max-w-[45%] max-sm:max-w-[85%] m-auto max-h-screen">
           <Providers>
-            <Navbar />
-            <div className="mt-4"></div>
             {children}
           </Providers>
         </main>

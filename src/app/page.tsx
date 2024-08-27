@@ -1,15 +1,21 @@
-/* eslint-disable react/no-unescaped-entities */
+'use client';
 
-import Home from '@/components/Home';
-import Exp from '@/components/Exp';
-import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import MainPage from './main';
+import ThemeSwitch from '@/components/ThemeSwitch';
 
 function Main() {
+     const [mounted, setMounted] = useState(false);
+
+     useEffect(() => setMounted(true), []);
+
+     if (!mounted) return null;
+
      return (
-          <div className='flex flex-col space-y-10'>
-               <Home />
-               <Exp />
+          <div className='flex flex-col justify-between h-screen py-10'>
+               <ThemeSwitch />
+               <MainPage />
+               <div></div>
           </div>
      );
 }

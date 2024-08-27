@@ -2,9 +2,8 @@
 
 import { FiSun, FiMoon } from "react-icons/fi";
 import { IoSunny } from "react-icons/io5";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
-import LineAnimation from "./Line";
 
 export default function ThemeSwitch() {
   const [mounted, setMounted] = useState(false);
@@ -12,21 +11,15 @@ export default function ThemeSwitch() {
 
   useEffect(() => setMounted(true), []);
 
-  if (!mounted) return;
+  if (!mounted) return null;
 
-  if (resolvedTheme === "dark") {
-    return (
-      <div className="transform transition-transform duration-1000 hover:rotate-360 cursor-pointer">
+  return (
+    <div className="cursor-pointer">
+      {resolvedTheme === "dark" ? (
         <IoSunny onClick={() => setTheme("light")} />
-      </div>
-    );
-  }
-
-  if (resolvedTheme === "light") {
-    return (
-      <div className="transform transition-transform duration-1000 hover:rotate-360 cursor-pointer">
+      ) : (
         <FiMoon onClick={() => setTheme("dark")} />
-      </div>
-    );
-  }
+      )}
+    </div>
+  );
 }
