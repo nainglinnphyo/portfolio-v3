@@ -7,7 +7,7 @@ function Home() {
     <div>
       <div>
         <h1 className="font-bold text-lg max-sm:text-base">Naing Linn Phyo</h1>
-        <h2 className="text-base max-sm:text-sm">Senior Backend Developer</h2>
+        <h2 className="text-base max-sm:text-sm">Team Lead</h2>
       </div>
       <div className="max-sm:mt-4 mt-2">
         <p className="max-sm:text-sm">
