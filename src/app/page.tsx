@@ -1,19 +1,22 @@
-/* eslint-disable react/no-unescaped-entities */
+import Exp from "@/components/Exp";
+import Hero from "@/components/Hero";
+import Stack from "@/components/Stack";
+import Marquee from "@/components/ui/Marquee";
+import { marqueeItems } from "@/utils/stack";
 
-import Home from '@/components/Home';
-import Exp from '@/components/Exp';
-import Link from 'next/link';
-import React from 'react';
-import Footer from '@/components/Footer';
+export default function Main() {
+  return (
+    <div className="flex flex-col gap-20 max-sm:gap-14">
+      <Hero />
 
-function Main() {
-     return (
-          <div className='flex flex-col space-y-10'>
-               <Home />
-               <Exp />
-               <Footer />
-          </div>
-     );
+      <Marquee
+        items={marqueeItems}
+        duration={42}
+        className="-mx-5 border-y border-line/60 py-3 sm:-mx-8"
+      />
+
+      <Exp />
+      <Stack />
+    </div>
+  );
 }
-
-export default Main;

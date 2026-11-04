@@ -2,44 +2,265 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================================
+   Design tokens
+   Channels are space separated RGB so Tailwind's <alpha-value>
+   works: text-fg/60, bg-accent/15, border-line/80 ...
+   ============================================================ */
 @layer base {
+  :root {
+    --bg: 255 255 255;
+    --bg-elevated: 250 250 249;
+    --surface: 244 245 245;
+    --line: 226 229 229;
+    --fg: 9 14 12;
+    --muted: 90 99 96;
+    --accent: 11 101 47;
+    --accent-bright: 16 134 63;
+    --glow: 11 101 47;
+    --grain-opacity: 0.035;
+    --shadow-ambient: 0 1px 2px rgb(9 14 12 / 0.04), 0 8px 24px -12px rgb(9 14 12 / 0.12);
+  }
+
+  .dark {
+    --bg: 8 10 11;
+    --bg-elevated: 14 17 18;
+    --surface: 20 24 26;
+    --line: 38 44 47;
+    --fg: 236 240 238;
+    --muted: 143 153 151;
+    --accent: 74 222 128;
+    --accent-bright: 134 239 172;
+    --glow: 74 222 128;
+    --grain-opacity: 0.055;
+    --shadow-ambient: 0 1px 2px rgb(0 0 0 / 0.5), 0 24px 48px -24px rgb(0 0 0 / 0.8);
+  }
+
+  * {
+    border-color: rgb(var(--line));
+  }
+
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+
   body {
-    @apply dark:bg-gray-800 bg-white;
+    background-color: rgb(var(--bg));
+    color: rgb(var(--fg));
+    font-feature-settings: "ss01", "cv01";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: rgb(var(--accent) / 0.25);
+    color: rgb(var(--fg));
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--accent));
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Lenis smooth scroll */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
-@keyframes underline-animation {
-  from {
-    width: 0;
+
+/* ============================================================
+   Utilities
+   ============================================================ */
+@layer utilities {
+  /* Frosted panel — the 2026 flavour: low-alpha fill, hairline
+     border, inset highlight rather than a heavy blur. */
+  .glass {
+    background-color: rgb(var(--bg-elevated) / 0.6);
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    border: 1px solid rgb(var(--line) / 0.9);
+    box-shadow: inset 0 1px 0 0 rgb(255 255 255 / 0.06), var(--shadow-ambient);
   }
-  to {
+
+  /* Dotted blueprint field — keeps the crosshair motif of v3 */
+  .grid-dots {
+    background-image: radial-gradient(
+      circle at center,
+      rgb(var(--line)) 1px,
+      transparent 1px
+    );
+    background-size: 28px 28px;
+  }
+
+  .grid-lines {
+    background-image: linear-gradient(to right, rgb(var(--line) / 0.6) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(var(--line) / 0.6) 1px, transparent 1px);
+    background-size: 72px 72px;
+  }
+
+  /* Edge-faded mask for marquees + background fields */
+  .mask-x {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+  }
+
+  .mask-radial {
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 35%, black 20%, transparent 78%);
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 35%, black 20%, transparent 78%);
+  }
+
+  .mask-b {
+    -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent);
+    mask-image: linear-gradient(to bottom, black 55%, transparent);
+  }
+
+  .text-gradient {
+    background-image: linear-gradient(
+      100deg,
+      rgb(var(--fg)) 0%,
+      rgb(var(--fg)) 40%,
+      rgb(var(--accent-bright)) 65%,
+      rgb(var(--fg)) 92%
+    );
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .glow-accent {
+    box-shadow: 0 0 0 1px rgb(var(--accent) / 0.35), 0 0 28px -6px rgb(var(--glow) / 0.45);
+  }
+
+  /* Cursor-tracked spotlight, fed by --mx / --my from React */
+  .spotlight::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    background: radial-gradient(
+      320px circle at var(--mx, 50%) var(--my, 50%),
+      rgb(var(--accent) / 0.14),
+      transparent 70%
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .spotlight:hover::before,
+  .spotlight:focus-within::before {
+    opacity: 1;
+  }
+
+  .spotlight-border::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    background: radial-gradient(
+      260px circle at var(--mx, 50%) var(--my, 50%),
+      rgb(var(--accent) / 0.65),
+      transparent 65%
+    );
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .spotlight-border:hover::after,
+  .spotlight-border:focus-within::after {
+    opacity: 1;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* ============================================================
+   Components
+   ============================================================ */
+@layer components {
+  /* Link underline that wipes in, kept from v3 and tokenised */
+  .underline-animation {
+    position: relative;
+  }
+
+  .underline-animation::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 0;
+    height: 1.5px;
+    background-color: currentColor;
+    transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .underline-animation:hover::after,
+  .underline-animation:focus-visible::after,
+  .underline-animation.active::after {
     width: 100%;
   }
-}
 
-.underline-animation {
-  position: relative;
-  overflow: hidden;
-}
+  /* Inline link: accent + wipe */
+  .link-accent {
+    position: relative;
+    color: rgb(var(--accent));
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+  }
 
-.underline-animation::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 0;
-  height: 2px; /* Adjust the height of the underline as needed */
-  background-color: currentColor; /* Use the current text color */
-  transition: width 0.3s ease-in-out; /* Adjust the duration as needed */
-}
+  .link-accent::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 1.5px;
+    background-color: currentColor;
+    transform-origin: right;
+    transform: scaleX(1);
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
 
-.underline-animation:hover::after,
-.underline-animation.active::after {
-  width: 100%;
-}
-
-body {
-  font-family: "wudoo-mono", sans-serif;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  .link-accent:hover::after {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
 }
