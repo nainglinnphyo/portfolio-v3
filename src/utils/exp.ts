@@ -28,7 +28,7 @@ export const exp: Role[] = [
   },
   {
     title: "Dev Team Lead",
-    company: "Fary Taxi",
+    company: "FARY",
     workDate: "April 2024 — August 2025",
     jd: [
       "Oversaw the planning, execution and delivery of software projects, holding them to quality standards, deadlines and budget.",

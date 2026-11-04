@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useRef } from "react";
 import { FiArrowUpRight } from "react-icons/fi";
 import Magnetic from "./ui/Magnetic";
+import ProductList from "./ui/ProductList";
 import SplitText from "./ui/SplitText";
 import { metrics, profile } from "@/utils/profile";
 
@@ -88,12 +89,8 @@ export default function Hero() {
           product-management side of delivery — roadmap, scoping and the translation
           of business requirements into something a team can build. I came up through
           backend in JavaScript, TypeScript, PHP and Golang, and still work in
-          microservice territory: gRPC, Redis, event-driven systems. Previously led
-          development on{" "}
-          <Link href={profile.products[0].href ?? "#"} className="link-accent">
-            {profile.products[0].name}
-          </Link>{" "}
-          and Getbak.
+          microservice territory: gRPC, Redis, event-driven systems. Products
+          I&apos;ve led: <ProductList />.
         </motion.p>
 
         {/* Metrics */}

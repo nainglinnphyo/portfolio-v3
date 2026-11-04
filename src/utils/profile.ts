@@ -10,9 +10,12 @@ export const profile = {
   tagline: "Business logic & delivery",
   location: "Yangon, MM",
   company: { name: "xsphere.co", href: "https://xsphere.co" },
+  /** Rendered by components/ui/ProductList.tsx — add one here and the hero
+      and About page both pick it up. */
   products: [
-    { name: "Fary Taxi", href: "https://farytaxi.com" },
+    { name: "FARY", href: "https://farytaxi.com" as string | null },
     { name: "Getbak", href: null as string | null },
+    { name: "Room Social", href: "https://room.com.mm" as string | null },
   ],
   links: [
     { label: "LinkedIn", href: "https://www.linkedin.com/in/dev-nainglinnphyo" },
@@ -27,7 +30,7 @@ export const profile = {
 export const metrics = [
   { value: "4+", label: "Years shipping" },
   { value: "3", label: "Roles, one company" },
-  { value: "2", label: "Products led" },
+  { value: "3", label: "Products led" },
 ];
 
 /** The two halves of the current job, used on the home page. */

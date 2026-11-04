@@ -2,6 +2,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageHeader from "@/components/ui/PageHeader";
+import ProductList from "@/components/ui/ProductList";
 import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
 import SpotlightCard from "@/components/ui/SpotlightCard";
@@ -80,12 +81,9 @@ export default function About() {
           between them.
         </p>
         <p>
-          Before this I led development on{" "}
-          <Link href={profile.products[0].href ?? "#"} className="link-accent">
-            {profile.products[0].name}
-          </Link>{" "}
-          and Getbak: gRPC between services, Redis on the hot paths, and a
-          Postgres/Scylla split chosen per access pattern rather than per preference.
+          The products I&apos;ve led — <ProductList /> — run gRPC between services,
+          Redis on the hot paths, and a Postgres/Scylla split chosen per access
+          pattern rather than per preference.
         </p>
       </Reveal>
 
