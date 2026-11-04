@@ -3,7 +3,12 @@
 Personal site for Naing Linn Phyo — Next.js App Router, Tailwind, and a
 hand-written WebGL hero.
 
+Requires **Node 26** (`.nvmrc`, and `engines.node` in `package.json`). Vercel
+reads `engines.node` in preference to the dashboard's Node.js Version setting,
+so that field is the single place the deploy runtime is pinned.
+
 ```bash
+nvm use      # reads .nvmrc
 pnpm install
 pnpm dev     # http://localhost:3000
 pnpm build
