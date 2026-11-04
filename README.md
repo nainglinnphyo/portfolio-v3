@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# portfolio-v3
 
-## Getting Started
-
-First, run the development server:
+Personal site for Naing Linn Phyo — Next.js App Router, Tailwind, and a
+hand-written WebGL hero.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
+pnpm dev     # http://localhost:3000
+pnpm build
+pnpm lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Concern | Choice |
+|---|---|
+| Framework | Next.js 14 (App Router, static export-friendly) |
+| Styling | Tailwind + CSS custom-property tokens |
+| Theme | `next-themes`, `class` strategy |
+| Motion | Framer Motion |
+| Smooth scroll | Lenis |
+| 3D | three.js via `@react-three/fiber` + a custom GLSL point shader |
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Theming
 
-## Learn More
+Colours are **not** written as Tailwind palette values. `src/app/globals.css`
+defines space-separated RGB channels on `:root` and `.dark`
+(`--bg`, `--fg`, `--muted`, `--line`, `--accent`, …) and
+`tailwind.config.ts` maps them to utilities, so `text-fg/60` and
+`bg-accent/15` work and a single token change re-themes everything.
 
-To learn more about Next.js, take a look at the following resources:
+## The hero scene
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+`src/components/three/` holds the WebGL layer:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- `shaders.ts` — the vertex/fragment pair. Points sit on a Fibonacci sphere
+  and are displaced along their own normals by two octaves of simplex noise,
+  plus a gaussian bulge under the pointer.
+- `ParticleField.tsx` — geometry, uniforms, and the frame loop. All animated
+  values are lerped frame-rate independently; nothing allocates per frame.
+- `WireShell.tsx` / `CameraRig.tsx` — the counter-rotating wireframes and
+  pointer parallax.
+- `HeroScene.tsx` — the guard rails: dynamic import (`ssr: false`), mount
+  deferred past first paint, `frameloop` suspended via `IntersectionObserver`
+  when scrolled away, particle budget halved under 768px, and the canvas not
+  mounted at all under `prefers-reduced-motion`.
 
-## Deploy on Vercel
+Blending is theme-dependent: additive on near-black, normal on white, because
+additive blending washes out completely over a light background.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Content
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Everything editable lives in `src/utils/`:
+
+- `profile.ts` — name, role, links, status line, headline metrics
+- `exp.ts` — the experience timeline
+- `stack.ts` — bento tiles and the marquee words
+
+`src/utils` is inside the Tailwind `content` glob on purpose — the bento
+column spans are data, and leaving it out silently purges them.
+
+## Accessibility
+
+Reduced motion is honoured at four levels: Lenis is not started, the canvas is
+not mounted, Framer variants collapse to fades, and CSS animations are
+neutralised in `globals.css`. The kinetic headline ships a visually-hidden
+copy of the real string, and there is a skip link to `#content`.

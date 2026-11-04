@@ -1,33 +1,28 @@
-import LineAnimation from "@/components/Line";
-import LineAnimationTwo from "@/components/LineAnimateTwo";
+"use client";
+
+import { MotionConfig } from "framer-motion";
 import { ThemeProvider } from "next-themes";
-// import from
+import type { ReactNode } from "react";
+import AmbientCrosshairs from "@/components/AmbientCrosshairs";
+import CursorGlow from "@/components/ui/CursorGlow";
+import ScrollProgress from "@/components/ui/ScrollProgress";
+import SmoothScroll from "@/components/ui/SmoothScroll";
 
-export function Providers({ children }: { children: React.ReactNode }) {
+/**
+ * Everything that has to exist once, above the page, and only in the browser:
+ * the theme context, the Lenis loop, and the three decorative layers
+ * (crosshair field, cursor light, scroll progress).
+ */
+export function Providers({ children }: { children: ReactNode }) {
   return (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-      <div className="relative">
-        <div className="absolute right-0 top-72 -z-10">
-          <LineAnimationTwo />
-        </div>
-        <div className="absolute left-0 top-72 -z-10 lg:block hidden">
-          <LineAnimationTwo />
-        </div>
-        <div className="absolute right-64 top-72 -z-10 lg:block hidden">
-          <LineAnimationTwo />
-        </div>
-
-        <div className="absolute right-0 bottom-40 2 -z-10">
-          <LineAnimationTwo />
-        </div>
-        <div className="absolute left-0 bottom-40 -z-10 lg:block hidden">
-          <LineAnimationTwo />
-        </div>
-        <div className="absolute right-64 bottom-40 -z-10 lg:block hidden">
-          <LineAnimationTwo />
-        </div>
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+      <MotionConfig reducedMotion="user">
+        <SmoothScroll />
+        <ScrollProgress />
+        <CursorGlow />
+        <AmbientCrosshairs />
         {children}
-      </div>
+      </MotionConfig>
     </ThemeProvider>
   );
 }

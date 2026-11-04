@@ -1,51 +1,53 @@
 "use client";
-import React, { useEffect, useState } from "react";
 
-const getRandomDelay = () => Math.random() * 3;
-const getRandomDuration = () => 0.5 + Math.random() * (1 - 0.5);
+import { useEffect, useState } from "react";
 
-function LineAnimationTwo() {
-  const [horizontalDelay, setHorizontalDelay] = useState("0s");
-  const [verticalDelay, setVerticalDelay] = useState("0s");
-  const [horizontalDuration, setHorizontalDuration] = useState("1s");
-  const [verticalDuration, setVerticalDuration] = useState("1s");
+const randomDelay = () => Math.random() * 3;
+const randomDuration = () => 0.5 + Math.random() * 0.5;
+
+/**
+ * A single crosshair node with two light beams sweeping through it.
+ * Timings are randomised in an effect, not during render, so the server and
+ * client markup agree and the field still de-synchronises on screen.
+ */
+export default function LineAnimationTwo() {
+  const [timing, setTiming] = useState({
+    horizontalDelay: "0s",
+    verticalDelay: "0s",
+    horizontalDuration: "1s",
+    verticalDuration: "1s",
+  });
 
   useEffect(() => {
-    // Set random animation delays and durations
-    setHorizontalDelay(`${getRandomDelay()}s`);
-    setVerticalDelay(`${getRandomDelay()}s`);
-    setHorizontalDuration(`${getRandomDuration()}s`);
-    setVerticalDuration(`${getRandomDuration()}s`);
+    setTiming({
+      horizontalDelay: `${randomDelay()}s`,
+      verticalDelay: `${randomDelay()}s`,
+      horizontalDuration: `${randomDuration()}s`,
+      verticalDuration: `${randomDuration()}s`,
+    });
   }, []);
+
   return (
     <div className="flex items-center justify-center">
-      <div className="relative w-40  h-40 flex items-center justify-center">
-        <div
-          className={`absolute w-[0.4rem] h-[0.4rem] rounded-full bg-[#f6f7f7] dark:bg-[#2f3a4a] z-20`}
-        ></div>
-        <div
-          className={`absolute w-4 h-[0.093rem] bg-white dark:bg-[#1f2937] z-10 animate-pulse`}
-        ></div>
-        <div
-          className={`absolute w-[0.093rem] h-4 dark:bg-[#1f2937] bg-white z-10 animate-pulse`}
-        ></div>
-        <div
-          className={`absolute w-full h-[0.093rem] bg-primary  dark:bg-[#2f3a4a] opacity-0 animate-slideVertical transition-opacity -z-10`}
+      <div className="relative flex h-40 w-40 items-center justify-center">
+        <span className="absolute z-20 h-[0.4rem] w-[0.4rem] rounded-full bg-line" />
+        <span className="absolute z-10 h-px w-4 bg-bg motion-safe:animate-pulse" />
+        <span className="absolute z-10 h-4 w-px bg-bg motion-safe:animate-pulse" />
+        <span
+          className="absolute -z-10 h-px w-full bg-line opacity-0 motion-safe:animate-slideVertical"
           style={{
-            animationDelay: verticalDelay,
-            animationDuration: verticalDuration,
+            animationDelay: timing.verticalDelay,
+            animationDuration: timing.verticalDuration,
           }}
-        ></div>
-        <div
-          className={`absolute w-[0.093rem] h-full bg-primary dark:bg-[#2f3a4a] opacity-0 animate-slideHorizontal transition-opacity -z-10`}
+        />
+        <span
+          className="absolute -z-10 h-full w-px bg-line opacity-0 motion-safe:animate-slideHorizontal"
           style={{
-            animationDelay: horizontalDelay,
-            animationDuration: horizontalDuration,
+            animationDelay: timing.horizontalDelay,
+            animationDuration: timing.horizontalDuration,
           }}
-        ></div>
+        />
       </div>
     </div>
   );
 }
-
-export default LineAnimationTwo;
