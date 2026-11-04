@@ -9,14 +9,11 @@ export type Role = {
   jd: string[];
 };
 
-/* TODO(nlp): "June 2025" is the month I used for the step up to Head of
-   Department — correct it here and the timeline, the home page and the
-   closed end dates below all follow. */
 export const exp: Role[] = [
   {
     title: "Head of Department",
     company: "Xsphere Co.,Ltd",
-    workDate: "June 2025 — Present",
+    workDate: "August 2025 — Present",
     current: true,
     summary:
       "Own the business logic layer across the product line, and the product-management side of getting it shipped.",
@@ -32,7 +29,7 @@ export const exp: Role[] = [
   {
     title: "Dev Team Lead",
     company: "Fary Taxi",
-    workDate: "April 2024 — June 2025",
+    workDate: "April 2024 — August 2025",
     jd: [
       "Oversaw the planning, execution and delivery of software projects, holding them to quality standards, deadlines and budget.",
       "Provided technical direction and expertise, keeping best practice in software development and architecture in the team's default path.",
@@ -43,7 +40,7 @@ export const exp: Role[] = [
   {
     title: "Senior Backend Developer",
     company: "Xsphere Co.,Ltd",
-    workDate: "April 2022 — June 2025",
+    workDate: "April 2022 — August 2025",
     jd: [
       "Architected and implemented scalable, reliable and maintainable backend services and APIs.",
       "Designed and optimised database schemas, wrote efficient queries and protected data integrity.",
