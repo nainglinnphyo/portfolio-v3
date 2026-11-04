@@ -1,10 +1,10 @@
-import Exp from "@/components/Exp";
+import Currently from "@/components/Currently";
 import Hero from "@/components/Hero";
-import Stack from "@/components/Stack";
+import PageIndex from "@/components/PageIndex";
 import Marquee from "@/components/ui/Marquee";
 import { marqueeItems } from "@/utils/stack";
 
-export default function Main() {
+export default function Home() {
   return (
     <div className="flex flex-col gap-20 max-sm:gap-14">
       <Hero />
@@ -15,8 +15,8 @@ export default function Main() {
         className="-mx-5 border-y border-line/60 py-3 sm:-mx-8"
       />
 
-      <Exp />
-      <Stack />
+      <Currently />
+      <PageIndex />
     </div>
   );
 }

@@ -3,7 +3,6 @@
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { useRef } from "react";
 import SubExp from "./SubExp";
-import SectionHeading from "./ui/SectionHeading";
 import { exp } from "@/utils/exp";
 
 /**
@@ -23,9 +22,7 @@ export default function Exp() {
   const glowTop = useTransform(fill, [0, 1], ["0%", "100%"]);
 
   return (
-    <section id="experience" className="space-y-8 scroll-mt-28 max-sm:space-y-6">
-      <SectionHeading index="01" title="Experience" hint="most recent first" />
-
+    <section className="space-y-8 max-sm:space-y-6">
       <div ref={list} className="relative">
         {/* Rail: track + scroll-linked fill + a travelling highlight */}
         <span
@@ -48,6 +45,7 @@ export default function Exp() {
             <SubExp
               key={`${e.company}-${e.title}`}
               company={e.company}
+              current={e.current}
               jd={e.jd}
               title={e.title}
               workDate={e.workDate}

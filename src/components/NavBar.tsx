@@ -10,12 +10,9 @@ import { profile } from "@/utils/profile";
 
 const routes = [
   { href: "/", label: "Home" },
+  { href: "/work", label: "Work" },
+  { href: "/stack", label: "Stack" },
   { href: "/about", label: "About" },
-];
-
-const anchors = [
-  { href: "/#experience", label: "Work" },
-  { href: "/#stack", label: "Stack" },
 ];
 
 /**
@@ -53,7 +50,7 @@ export default function Navbar() {
                   <Link
                     href={route.href}
                     aria-current={active ? "page" : undefined}
-                    className={`relative z-[1] block rounded-full px-3 py-1.5 text-sm transition-colors duration-300 ${
+                    className={`relative z-[1] block rounded-full px-3 py-1.5 text-sm transition-colors duration-300 max-sm:px-2.5 ${
                       active ? "text-accent" : "text-muted hover:text-fg"
                     }`}
                   >
@@ -71,18 +68,6 @@ export default function Navbar() {
               );
             })}
 
-            <li aria-hidden="true" className="mx-1 h-4 w-px bg-line" />
-
-            {anchors.map((anchor) => (
-              <li key={anchor.href}>
-                <Link
-                  href={anchor.href}
-                  className="block rounded-full px-3 py-1.5 text-sm text-muted transition-colors duration-300 hover:text-fg max-sm:px-2"
-                >
-                  {anchor.label}
-                </Link>
-              </li>
-            ))}
           </ul>
         </nav>
 

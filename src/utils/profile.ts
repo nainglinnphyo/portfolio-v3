@@ -6,8 +6,8 @@
  */
 export const profile = {
   name: "Naing Linn Phyo",
-  role: "Team Lead",
-  tagline: "Backend engineer & team lead",
+  role: "Head of Department",
+  tagline: "Business logic & delivery",
   location: "Yangon, MM",
   company: { name: "xsphere.co", href: "https://xsphere.co" },
   products: [
@@ -26,6 +26,22 @@ export const profile = {
 /* Derived from utils/exp.ts — bump these when that list changes. */
 export const metrics = [
   { value: "4+", label: "Years shipping" },
+  { value: "3", label: "Roles, one company" },
   { value: "2", label: "Products led" },
-  { value: "4", label: "Languages in anger" },
+];
+
+/** The two halves of the current job, used on the home page. */
+export const focus = [
+  {
+    label: "Engineering",
+    body: "The business logic layer: domain models, service boundaries and the contracts between them. One rule, one home.",
+  },
+  {
+    label: "Product",
+    body: "Roadmap, scoping and sprint planning — turning commercial goals into specs a team can build from without guessing.",
+  },
+  {
+    label: "People",
+    body: "Hiring, mentoring and a review culture, so quality does not depend on any one person being in the room.",
+  },
 ];

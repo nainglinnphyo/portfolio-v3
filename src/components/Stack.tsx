@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import Reveal, { revealItem } from "./ui/Reveal";
-import SectionHeading from "./ui/SectionHeading";
 import SpotlightCard from "./ui/SpotlightCard";
 import { stack } from "@/utils/stack";
 
@@ -13,9 +12,7 @@ import { stack } from "@/utils/stack";
  */
 export default function Stack() {
   return (
-    <section id="stack" className="space-y-6 scroll-mt-28">
-      <SectionHeading index="02" title="Stack" hint="what I reach for" />
-
+    <section className="space-y-6">
       <Reveal stagger={0.08} className="grid grid-cols-2 gap-3 lg:grid-cols-6">
         {stack.map((group) => (
           <motion.div

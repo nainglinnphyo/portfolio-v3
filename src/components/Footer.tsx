@@ -26,7 +26,7 @@ export default function Footer() {
 
       <Reveal className="flex flex-wrap items-end justify-between gap-6 pb-8 pt-6">
         <div className="space-y-1">
-          <p className="text-sm text-fg">{profile.role} · Backend · Web</p>
+          <p className="text-sm text-fg">{profile.role} · Business logic · Delivery</p>
           <p className="text-xs text-muted">
             © {new Date().getFullYear()} {profile.name}. All rights reserved.
           </p>

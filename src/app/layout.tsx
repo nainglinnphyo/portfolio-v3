@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/NavBar";
 import Grain from "@/components/ui/Grain";
+import PageTransition from "@/components/ui/PageTransition";
 import "./globals.css";
 import { Providers } from "./providers";
 
@@ -24,15 +25,16 @@ const WudooMono = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),
   title: {
-    default: "Naing Linn Phyo — Backend Developer & Team Lead",
+    default: "Naing Linn Phyo — Head of Department & Backend Engineer",
     template: "%s · Naing Linn Phyo",
   },
   description:
-    "Experienced full-stack developer with front-end and back-end technologies, including JavaScript, TypeScript, Node.js, GoLang, PHP and SQL.",
+    "Head of Department at xsphere.co — owning the business logic layer across the product line and the product-management side of delivery. Backgrounded in TypeScript, Go, PHP and SQL.",
   keywords: [
     "Naing Linn Phyo",
+    "head of department",
+    "engineering manager",
     "backend developer",
-    "team lead",
     "TypeScript",
     "Golang",
     "NestJS",
@@ -43,15 +45,15 @@ export const metadata: Metadata = {
     type: "website",
     url: SITE,
     siteName: "Naing Linn Phyo",
-    title: "Naing Linn Phyo — Backend Developer & Team Lead",
+    title: "Naing Linn Phyo — Head of Department & Backend Engineer",
     description:
-      "Backend engineer and team lead building real-time, event-driven systems with TypeScript, Go and gRPC.",
+      "Owning the business logic layer and the delivery plan around it — TypeScript, Go, gRPC and event-driven systems.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Naing Linn Phyo — Backend Developer & Team Lead",
+    title: "Naing Linn Phyo — Head of Department & Backend Engineer",
     description:
-      "Backend engineer and team lead building real-time, event-driven systems with TypeScript, Go and gRPC.",
+      "Owning the business logic layer and the delivery plan around it — TypeScript, Go, gRPC and event-driven systems.",
   },
   robots: { index: true, follow: true },
 };
@@ -90,7 +92,7 @@ export default function RootLayout({
           <div className="relative mx-auto w-full max-w-3xl px-5 sm:px-8">
             <Navbar />
             <main id="content" className="pt-2">
-              {children}
+              <PageTransition>{children}</PageTransition>
             </main>
             <Footer />
           </div>

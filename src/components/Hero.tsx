@@ -6,7 +6,7 @@ import { useSafeReducedMotion } from "@/hooks/useSafeReducedMotion";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRef } from "react";
-import { FiArrowDownRight, FiArrowUpRight } from "react-icons/fi";
+import { FiArrowUpRight } from "react-icons/fi";
 import Magnetic from "./ui/Magnetic";
 import SplitText from "./ui/SplitText";
 import { metrics, profile } from "@/utils/profile";
@@ -80,18 +80,20 @@ export default function Hero() {
           transition={{ delay: 0.7, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="max-w-[58ch] text-base leading-relaxed text-muted max-sm:text-sm"
         >
-          I'm a backend developer and team lead at{" "}
+          I'm {profile.role} at{" "}
           <Link href={profile.company.href} className="link-accent">
             {profile.company.name}
           </Link>
-          , specializing in JavaScript, TypeScript, PHP, and Golang. With extensive
-          experience across frontend and backend, I build powerful and responsive web
-          applications. Currently I lead development of{" "}
+          , where I own the business logic layer across our products and run the
+          product-management side of delivery — roadmap, scoping and the translation
+          of business requirements into something a team can build. I came up through
+          backend in JavaScript, TypeScript, PHP and Golang, and still work in
+          microservice territory: gRPC, Redis, event-driven systems. Previously led
+          development on{" "}
           <Link href={profile.products[0].href ?? "#"} className="link-accent">
             {profile.products[0].name}
           </Link>{" "}
-          and Getbak, leveraging microservice technologies like gRPC and Redis to ship
-          efficient, scalable systems.
+          and Getbak.
         </motion.p>
 
         {/* Metrics */}
@@ -120,11 +122,11 @@ export default function Hero() {
         >
           <Magnetic strength={7}>
             <a
-              href="#experience"
+              href="/work"
               className="group inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-4 py-2 text-sm font-semibold text-accent transition-colors duration-300 hover:bg-accent/20"
             >
-              View experience
-              <FiArrowDownRight className="transition-transform duration-300 group-hover:translate-y-0.5" />
+              View work
+              <FiArrowUpRight className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </a>
           </Magnetic>
 

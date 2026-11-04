@@ -5,7 +5,7 @@ import { SiPluscodes } from "react-icons/si";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-export default function SubExp({ company, jd, title, workDate }: JobDescription) {
+export default function SubExp({ company, current, jd, title, workDate }: JobDescription) {
   return (
     <motion.article
       initial="hidden"
@@ -28,7 +28,14 @@ export default function SubExp({ company, jd, title, workDate }: JobDescription)
       >
         <span className="absolute h-3 w-px bg-line" />
         <span className="absolute h-px w-3 bg-line" />
-        <span className="relative h-1.5 w-1.5 rounded-full bg-accent transition-transform duration-500 group-hover:scale-150" />
+        {current ? (
+          <span className="absolute inline-flex h-2.5 w-2.5 rounded-full bg-accent/50 motion-safe:animate-ping" />
+        ) : null}
+        <span
+          className={`relative h-1.5 w-1.5 rounded-full transition-transform duration-500 group-hover:scale-150 ${
+            current ? "bg-accent" : "bg-muted/60"
+          }`}
+        />
       </motion.span>
 
       <motion.header
@@ -43,11 +50,22 @@ export default function SubExp({ company, jd, title, workDate }: JobDescription)
         }}
         className="space-y-0.5"
       >
-        <p className="text-sm text-muted">{title}</p>
+        <div className="flex flex-wrap items-center gap-2">
+          <p className="text-sm text-muted">{title}</p>
+          {current ? (
+            <span className="rounded-full border border-accent/35 bg-accent/10 px-2 py-0.5 text-[0.65rem] uppercase tracking-[0.14em] text-accent">
+              Current
+            </span>
+          ) : null}
+        </div>
         <h3 className="text-lg font-bold tracking-tightest max-sm:text-base">
           {company}
         </h3>
-        <p className="text-xs tabular-nums text-accent">{workDate}</p>
+        <p
+          className={`text-xs tabular-nums ${current ? "text-accent" : "text-muted"}`}
+        >
+          {workDate}
+        </p>
       </motion.header>
 
       <ul className="mt-4 space-y-2.5">

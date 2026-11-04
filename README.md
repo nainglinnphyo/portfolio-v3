@@ -53,12 +53,26 @@ defines space-separated RGB channels on `:root` and `.dark`
 Blending is theme-dependent: additive on near-black, normal on white, because
 additive blending washes out completely over a light background.
 
+## Routes
+
+| Route | Holds |
+|---|---|
+| `/` | 3D hero, intro, the current role, and an index of the other pages |
+| `/work` | Full experience timeline with a scroll-linked rail |
+| `/stack` | Bento grid of the toolkit |
+| `/about` | Long-form bio and working principles |
+
+Only `/` mounts the WebGL hero, so the other three routes never download
+three.js. `components/ui/PageTransition.tsx` keys on the pathname to replay
+an entrance on each navigation.
+
 ## Content
 
 Everything editable lives in `src/utils/`:
 
 - `profile.ts` — name, role, links, status line, headline metrics
-- `exp.ts` — the experience timeline
+- `exp.ts` — the experience timeline; `current: true` marks the live role,
+  which drives the badge on `/work` and the card on the home page
 - `stack.ts` — bento tiles and the marquee words
 
 `src/utils` is inside the Tailwind `content` glob on purpose — the bento
